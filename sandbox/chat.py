@@ -22,9 +22,9 @@ from pathlib import Path
 
 import requests
 
-ROOT = Path(__file__).resolve().parents[1]
-WORKSPACE = ROOT / "sandbox" / "workspace"
-DOCKERFILE = ROOT / "sandbox" / "Dockerfile"
+SANDBOX_DIR = Path(__file__).resolve().parent
+WORKSPACE = SANDBOX_DIR / "workspace"
+DOCKERFILE = SANDBOX_DIR / "Dockerfile"
 IMAGE = "unsloth-ollama-sandbox:local"
 OLLAMA_URL = "http://127.0.0.1:11434"
 MODEL = "my-custom-model"
@@ -75,7 +75,7 @@ def ensure_image() -> None:
         return
     print(f"Building sandbox image {IMAGE}…")
     subprocess.run(
-        ["docker", "build", "-t", IMAGE, "-f", str(DOCKERFILE), str(ROOT / "sandbox")],
+        ["docker", "build", "-t", IMAGE, "-f", str(DOCKERFILE), str(SANDBOX_DIR)],
         check=True,
     )
 

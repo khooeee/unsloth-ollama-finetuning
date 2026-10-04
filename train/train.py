@@ -124,7 +124,7 @@ def main() -> None:
     print(f"Updated Modelfile → FROM ./{gguf.relative_to(ROOT).as_posix()}")
     print("Next:")
     print("  ollama create my-custom-model -f Modelfile")
-    print("  uv run python scripts/sandbox_chat.py")
+    print("  uv run sandbox/chat.py")
 
 
 if __name__ == "__main__":

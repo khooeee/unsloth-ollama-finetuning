@@ -79,7 +79,7 @@ ollama create my-custom-model -f Modelfile
 ## 5. Run a real tool-use prompt (sandbox)
 
 ```bash
-uv run scripts/sandbox_chat.py
+uv run sandbox/chat.py
 ```
 
 This:
@@ -92,7 +92,7 @@ This:
 Custom prompt:
 
 ```bash
-uv run scripts/sandbox_chat.py "Reproduce the failing pytest, fix the bug, re-run tests."
+uv run sandbox/chat.py "Reproduce the failing pytest, fix the bug, re-run tests."
 ```
 
 Toy project layout:
