@@ -51,19 +51,32 @@ def load_cases() -> list[dict]:
 
 
 def ollama_reply(prompt: str) -> dict:
-    r = requests.post(
-        f"{OLLAMA_URL}/api/chat",
-        json={
-            "model": MODEL,
-            "messages": [
-                {"role": "system", "content": SYSTEM},
-                {"role": "user", "content": prompt},
-            ],
-            "tools": TOOLS,
-            "stream": False,
-        },
-        timeout=600,
-    )
+    # Cap generation: Qwen3 can "think" / loop for a long time with the default
+    # 32k context, which looks like a hang on later cases (e.g. e12).
+    try:
+        r = requests.post(
+            f"{OLLAMA_URL}/api/chat",
+            json={
+                "model": MODEL,
+                "messages": [
+                    {"role": "system", "content": SYSTEM},
+                    {"role": "user", "content": prompt},
+                ],
+                "tools": TOOLS,
+                "stream": False,
+                "think": False,
+                "options": {
+                    "num_predict": 512,
+                    "num_ctx": 4096,
+                },
+            },
+            timeout=120,
+        )
+    except requests.Timeout as e:
+        raise SystemExit(
+            f"Ollama timed out after 120s on this case (model stuck generating?). "
+            f"Try: ollama stop {MODEL}"
+        ) from e
     r.raise_for_status()
     return r.json().get("message") or {}
 
@@ -172,12 +185,12 @@ def main() -> None:
         raise SystemExit(f"Ollama not reachable: {e}") from e
 
     for case in cases:
-        print(f"Scoring {case['id']}…")
+        print(f"Scoring {case['id']}…", flush=True)
         message = ollama_reply(case["prompt"])
         result = grade(case, message)
         results.append(result)
         status = "PASS" if result["pass"] else "FAIL"
-        print(f"  {status} {result['checks']}")
+        print(f"  {status} {result['checks']}", flush=True)
 
     n = len(results)
     passed = sum(1 for r in results if r["pass"])
