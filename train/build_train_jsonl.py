@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile data/sessions/*.yaml into data/train.jsonl (OpenAI messages format)."""
+"""Compile train/sessions/*.yaml into train/train.jsonl (OpenAI messages format)."""
 
 from __future__ import annotations
 
@@ -8,9 +8,9 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
-SESSIONS_DIR = ROOT / "data" / "sessions"
-OUT_PATH = ROOT / "data" / "train.jsonl"
+TRAIN_DIR = Path(__file__).resolve().parent
+SESSIONS_DIR = TRAIN_DIR / "sessions"
+OUT_PATH = TRAIN_DIR / "train.jsonl"
 
 SYSTEM_PROMPT = """You are a careful coding assistant that fixes bugs by inspecting code, editing files, and verifying with tests.
 

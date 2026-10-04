@@ -35,26 +35,26 @@ ollama serve
 
 ## 2. Build training JSONL
 
-Edit readable YAML under `data/sessions/`, then:
+Edit readable YAML under `train/sessions/`, then:
 
 ```bash
-uv run scripts/build_dataset.py
+uv run train/build_train_jsonl.py
 ```
 
-This writes `data/train.jsonl`.
+This writes `train/train.jsonl`.
 
 ---
 
 ## 3. Train + export GGUF
 
 ```bash
-uv run train.py
+uv run train/train.py
 ```
 
 What it does:
 
 1. Loads `unsloth/Qwen3-0.6B` with **`load_in_4bit=False`** (no train-time quant)
-2. Applies LoRA and trains briefly on `data/train.jsonl` (quick loop defaults)
+2. Applies LoRA and trains briefly on `train/train.jsonl` (quick loop defaults)
 3. Saves adapters under `outputs/lora_adapters/`
 4. Exports with:
 
@@ -64,7 +64,7 @@ model.save_pretrained_gguf("my_model", tokenizer, quantization_method="q4_k_m")
 
 5. Rewrites `Modelfile` `FROM` to the exported `.gguf`
 
-Tune loop speed in `train.py`: `MAX_STEPS`, `LORA_R`, `MAX_SEQ_LENGTH`.
+Tune loop speed in `train/train.py`: `MAX_STEPS`, `LORA_R`, `MAX_SEQ_LENGTH`.
 
 ---
 
@@ -125,5 +125,5 @@ uv run evals/score.py --dry-run
 
 ## Notes
 
-- If Unsloth MLX import paths differ slightly by version, check the error from `train.py` and adjust imports to match your installed `unsloth` / `unsloth_zoo`
+- If Unsloth MLX import paths differ slightly by version, check the error from `train/train.py` and adjust imports to match your installed `unsloth` / `unsloth_zoo`
 - **JSONL** is the training standard; **YAML** is the human-editable source

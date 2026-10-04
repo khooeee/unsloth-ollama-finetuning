@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 .DS_Store
-data/train.jsonl
+train/train.jsonl
 evals/prompts.jsonl
 my_model/
 outputs/

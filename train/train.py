@@ -2,8 +2,8 @@
 """
 Fine-tune Qwen3-0.6B with Unsloth's MLX path on Apple Silicon, then export GGUF.
 
-Reads:  data/train.jsonl  (build with scripts/build_dataset.py)
-Writes: my_model/         (GGUF via save_pretrained_gguf, q4_k_m)
+Reads:  train/train.jsonl  (build with train/build_train_jsonl.py)
+Writes: my_model/          (GGUF via save_pretrained_gguf, q4_k_m)
 """
 
 from __future__ import annotations
@@ -11,8 +11,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-TRAIN_PATH = ROOT / "data" / "train.jsonl"
+TRAIN_DIR = Path(__file__).resolve().parent
+ROOT = TRAIN_DIR.parent
+TRAIN_PATH = TRAIN_DIR / "train.jsonl"
 OUTPUT_DIR = ROOT / "outputs"
 GGUF_DIR = ROOT / "my_model"
 
@@ -32,7 +33,7 @@ def load_messages_dataset(path: Path) -> list[dict]:
                 continue
             rows.append(json.loads(line))
     if not rows:
-        raise SystemExit(f"No training rows in {path}. Run: uv run python scripts/build_dataset.py")
+        raise SystemExit(f"No training rows in {path}. Run: uv run train/build_train_jsonl.py")
     return rows
 
 
@@ -47,7 +48,7 @@ def main() -> None:
         ) from e
 
     if not TRAIN_PATH.exists():
-        raise SystemExit(f"Missing {TRAIN_PATH}. Run: uv run python scripts/build_dataset.py")
+        raise SystemExit(f"Missing {TRAIN_PATH}. Run: uv run train/build_train_jsonl.py")
 
     print(f"Loading {MODEL_NAME} (load_in_4bit=False)…")
     model, tokenizer = FastMLXModel.from_pretrained(
