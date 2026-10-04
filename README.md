@@ -6,23 +6,6 @@ Hardware target: Mac M5 with 32 GB memory
 
 ---
 
-## What you get
-
-| Piece | Role |
-|-------|------|
-| `data/sessions/*.yaml` | Readable training conversations (edit these) |
-| `data/train.jsonl` | Generated OpenAI-messages JSONL for Unsloth |
-| `train.py` | Unsloth **MLX** LoRA fine-tune + `save_pretrained_gguf(..., q4_k_m)` |
-| `Modelfile` | Points at exported GGUF for `ollama create` |
-| `scripts/sandbox_chat.py` | Ollama chat **with** `run_command` in Docker |
-| `evals/` | 12 held-out cases + text-only scorer (never executes commands) |
-
-**Training domain:** fixing/refactoring code via shell — failing tests, renames, off-by-ones, imports, etc.
-
-**Only tool:** `run_command` (bash). In train/eval *data*, tool results are fake text. Live execution happens only in `sandbox_chat.py` inside Docker.
-
----
-
 ## Prerequisites
 
 - macOS + Apple Silicon
