@@ -32,7 +32,7 @@ def load_messages_dataset(path: Path) -> list[dict]:
                 continue
             rows.append(json.loads(line))
     if not rows:
-        raise SystemExit(f"No training rows in {path}. Run: python scripts/build_dataset.py")
+        raise SystemExit(f"No training rows in {path}. Run: uv run python scripts/build_dataset.py")
     return rows
 
 
@@ -42,12 +42,12 @@ def main() -> None:
     except ImportError as e:
         raise SystemExit(
             "Could not import Unsloth MLX APIs (FastMLXModel / MLXTrainer).\n"
-            "Create a Python 3.11–3.13 venv and: pip install -r requirements.txt\n"
+            "Use Python 3.11–3.13 via uv, then: uv pip install -r requirements.txt\n"
             f"Original error: {e}"
         ) from e
 
     if not TRAIN_PATH.exists():
-        raise SystemExit(f"Missing {TRAIN_PATH}. Run: python scripts/build_dataset.py")
+        raise SystemExit(f"Missing {TRAIN_PATH}. Run: uv run python scripts/build_dataset.py")
 
     print(f"Loading {MODEL_NAME} (load_in_4bit=False)…")
     model, tokenizer = FastMLXModel.from_pretrained(
@@ -123,7 +123,7 @@ def main() -> None:
     print(f"Updated Modelfile → FROM ./{gguf.relative_to(ROOT).as_posix()}")
     print("Next:")
     print("  ollama create my-custom-model -f Modelfile")
-    print("  python scripts/sandbox_chat.py")
+    print("  uv run python scripts/sandbox_chat.py")
 
 
 if __name__ == "__main__":

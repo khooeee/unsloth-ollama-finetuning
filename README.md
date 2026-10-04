@@ -23,8 +23,6 @@ cd unsloth-ollama-finetuning
 
 # Use 3.12/3.13, not system 3.14
 uv venv --python 3.12 .venv
-source .venv/bin/activate
-
 uv pip install -r requirements.txt
 
 # Build sandbox image once (has pytest; runs with --network=none later)
@@ -102,7 +100,7 @@ This:
 Custom prompt:
 
 ```bash
-python scripts/sandbox_chat.py "Reproduce the failing pytest, fix the bug, re-run tests."
+uv run scripts/sandbox_chat.py "Reproduce the failing pytest, fix the bug, re-run tests."
 ```
 
 Toy project layout:
@@ -120,7 +118,7 @@ sandbox/workspace/
 12 held-out prompts in `evals/cases/*.yaml`. Scoring is **deterministic text rubrics** — it does **not** run commands.
 
 ```bash
-python evals/score.py
+uv run evals/score.py
 ```
 
 Example summary line: `8/12 pass · horizon … · coverage … · tool …`
@@ -128,7 +126,7 @@ Example summary line: `8/12 pass · horizon … · coverage … · tool …`
 Dry-run the scorer without Ollama:
 
 ```bash
-python evals/score.py --dry-run
+uv run evals/score.py --dry-run
 ```
 
 ---
@@ -136,11 +134,11 @@ python evals/score.py --dry-run
 ## Iterate
 
 1. Edit or add a session in `data/sessions/*.yaml` (keep long turns in YAML `|` blocks)
-2. `python scripts/build_dataset.py`
-3. `python train.py` (bump `MAX_STEPS` if needed)
+2. `uv run scripts/build_dataset.py`
+3. `uv run train.py` (bump `MAX_STEPS` if needed)
 4. `ollama create my-custom-model -f Modelfile`  # overwrites
-5. `python scripts/sandbox_chat.py`  # qualitative check
-6. `python evals/score.py`           # measure
+5. `uv run scripts/sandbox_chat.py`  # qualitative check
+6. `uv run evals/score.py`           # measure
 7. Note score vs change (“added 3 recovery tool traces → +2/12”)
 
 Tips:
