@@ -123,43 +123,7 @@ uv run evals/score.py --dry-run
 
 ---
 
-## Iterate
-
-1. Edit or add a session in `data/sessions/*.yaml` (keep long turns in YAML `|` blocks)
-2. `uv run scripts/build_dataset.py`
-3. `uv run train.py` (bump `MAX_STEPS` if needed)
-4. `ollama create my-custom-model -f Modelfile`  # overwrites
-5. `uv run scripts/sandbox_chat.py`  # qualitative check
-6. `uv run evals/score.py`           # measure
-7. Note score vs change (“added 3 recovery tool traces → +2/12”)
-
-Tips:
-
-- Prefer more **tool-trace** YAML sessions if the model plans but never calls `run_command`
-- Prefer more **plan-only** sessions if tool calls are noisy / incomplete
-- Reset the toy bug after demos: put `return a // b` back in `calc/ops.py` if you want to re-run the default prompt
-
----
-
-## Repo map
-
-```
-train.py
-Modelfile
-pyproject.toml
-data/sessions/*.yaml
-scripts/build_dataset.py
-scripts/sandbox_chat.py
-sandbox/Dockerfile
-sandbox/workspace/          # mounted into Docker
-evals/cases/*.yaml
-evals/score.py
-```
-
----
-
 ## Notes
 
-- **Quantization:** not during training; **q4_k_m only at GGUF export**
-- **JSONL** is the training standard; **YAML** is the human-editable source
 - If Unsloth MLX import paths differ slightly by version, check the error from `train.py` and adjust imports to match your installed `unsloth` / `unsloth_zoo`
+- **JSONL** is the training standard; **YAML** is the human-editable source
