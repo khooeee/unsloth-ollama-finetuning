@@ -43,13 +43,6 @@ uv run scripts/build_dataset.py
 
 This writes `data/train.jsonl`.
 
-Regenerate the starter sessions (optional; overwrites YAML):
-
-```bash
-uv run scripts/generate_sessions.py
-uv run scripts/build_dataset.py
-```
-
 ---
 
 ## 3. Train + export GGUF
@@ -156,7 +149,6 @@ Modelfile
 pyproject.toml
 data/sessions/*.yaml
 scripts/build_dataset.py
-scripts/generate_sessions.py
 scripts/sandbox_chat.py
 sandbox/Dockerfile
 sandbox/workspace/          # mounted into Docker
