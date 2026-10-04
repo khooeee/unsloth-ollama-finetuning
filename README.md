@@ -1,8 +1,8 @@
-# Qwen3-0.6B code-fix fine-tune (Unsloth MLX → GGUF → Ollama sandbox)
+# Unsloth MLX → Ollama sandbox tutorial
 
-Tutorial repo for a **fast feedback loop** on Apple Silicon: fine-tune a small model on **code-change** chats (inspect → edit → verify), export **GGUF q4_k_m**, then try a **real tool-use prompt** inside a **session-scoped Docker sandbox**.
+Fine-tune a small model on **code-change** chats (inspect → edit → verify), export **GGUF q4_k_m**, then try a **real tool-use prompt** inside a **session-scoped Docker sandbox**.
 
-Hardware target: Mac with Apple Silicon (developed for M5 / 32 GB).
+Hardware target: Mac M5 with 32 GB memory
 
 ---
 
