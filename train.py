@@ -42,7 +42,7 @@ def main() -> None:
     except ImportError as e:
         raise SystemExit(
             "Could not import Unsloth MLX APIs (FastMLXModel / MLXTrainer).\n"
-            "Use Python 3.11–3.13 via uv, then: uv pip install -r requirements.txt\n"
+            "Use Python 3.11–3.13 via uv, then: uv sync --python 3.12\n"
             f"Original error: {e}"
         ) from e
 

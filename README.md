@@ -22,8 +22,7 @@ Hardware target: Mac M5 with 32 GB memory
 cd unsloth-ollama-finetuning
 
 # Use 3.12/3.13, not system 3.14
-uv venv --python 3.12 .venv
-uv pip install -r requirements.txt
+uv sync --python 3.12
 
 # Build sandbox image once (has pytest; runs with --network=none later)
 docker build -t unsloth-ollama-sandbox:local -f sandbox/Dockerfile sandbox
@@ -154,7 +153,7 @@ Tips:
 ```
 train.py
 Modelfile
-requirements.txt
+pyproject.toml
 data/sessions/*.yaml
 scripts/build_dataset.py
 scripts/generate_sessions.py
