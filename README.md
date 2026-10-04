@@ -29,9 +29,10 @@ uv pip install -r requirements.txt
 
 # Build sandbox image once (has pytest; runs with --network=none later)
 docker build -t unsloth-ollama-sandbox:local -f sandbox/Dockerfile sandbox
-```
 
-Start Ollama (app or `ollama serve`).
+# Start ollama (in one tab)
+ollama serve
+```
 
 ---
 
@@ -40,7 +41,7 @@ Start Ollama (app or `ollama serve`).
 Edit readable YAML under `data/sessions/`, then:
 
 ```bash
-python scripts/build_dataset.py
+uv run scripts/build_dataset.py
 ```
 
 This writes `data/train.jsonl`.
@@ -48,8 +49,8 @@ This writes `data/train.jsonl`.
 Regenerate the starter sessions (optional; overwrites YAML):
 
 ```bash
-python scripts/generate_sessions.py
-python scripts/build_dataset.py
+uv run scripts/generate_sessions.py
+uv run scripts/build_dataset.py
 ```
 
 ---
@@ -57,7 +58,7 @@ python scripts/build_dataset.py
 ## 3. Train + export GGUF
 
 ```bash
-python train.py
+uv run train.py
 ```
 
 What it does:
@@ -88,7 +89,7 @@ ollama create my-custom-model -f Modelfile
 ## 5. Run a real tool-use prompt (sandbox)
 
 ```bash
-python scripts/sandbox_chat.py
+uv run scripts/sandbox_chat.py
 ```
 
 This:
