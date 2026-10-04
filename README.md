@@ -23,24 +23,6 @@ Hardware target: Mac M5 with 32 GB memory
 
 ---
 
-## Safety
-
-| Path | Executes shell? |
-|------|-----------------|
-| `train.py` / dataset build | **No** |
-| `evals/score.py` | **No** (grades text / tool-call JSON only) |
-| `scripts/sandbox_chat.py` | **Yes**, only via `docker exec` in a session container |
-
-Sandbox properties:
-
-- Session start: long-lived container (`--network=none`)
-- Mount: **only** `sandbox/workspace` → `/workspace`
-- Each `run_command`: `docker exec` (arbitrary bash — no allowlist)
-- Ctrl+C / exit: container stopped and removed
-- Worst case of `rm -rf`: container + `sandbox/workspace`, not your home directory
-
----
-
 ## Prerequisites
 
 - macOS + Apple Silicon
