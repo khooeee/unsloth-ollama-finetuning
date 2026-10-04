@@ -2,10 +2,8 @@
 __pycache__/
 *.pyc
 .DS_Store
+.pytest_cache/
+
+# Generated train artifacts
 train/train.jsonl
-evals/prompts.jsonl
-my_model/
 outputs/
-lora_model/
-*.gguf
-.hf_cache/

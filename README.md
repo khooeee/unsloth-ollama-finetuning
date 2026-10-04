@@ -59,7 +59,7 @@ What it does:
 4. Exports with:
 
 ```python
-model.save_pretrained_gguf("my_model", tokenizer, quantization_method="q4_k_m")
+model.save_pretrained_gguf("outputs/my_model", tokenizer, quantization_method="q4_k_m")
 ```
 
 5. Rewrites `Modelfile` `FROM` to the exported `.gguf`

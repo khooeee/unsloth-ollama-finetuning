@@ -3,7 +3,7 @@
 Fine-tune Qwen3-0.6B with Unsloth's MLX path on Apple Silicon, then export GGUF.
 
 Reads:  train/train.jsonl  (build with train/build_train_jsonl.py)
-Writes: my_model/          (GGUF via save_pretrained_gguf, q4_k_m)
+Writes: outputs/my_model/  (GGUF via save_pretrained_gguf, q4_k_m)
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ TRAIN_DIR = Path(__file__).resolve().parent
 ROOT = TRAIN_DIR.parent
 TRAIN_PATH = TRAIN_DIR / "train.jsonl"
 OUTPUT_DIR = ROOT / "outputs"
-GGUF_DIR = ROOT / "my_model"
+GGUF_DIR = OUTPUT_DIR / "my_model"
 
 # Non-4bit base so GGUF export stays reliable; we quantize at export time.
 MODEL_NAME = "unsloth/Qwen3-0.6B"
