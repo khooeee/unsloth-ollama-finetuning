@@ -1,0 +1,16 @@
+id: 013-encode-utf8
+messages:
+- role: user
+  content: write_report crashes on non-ASCII. Open/write with encoding='utf-8'.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Reproduce the UnicodeEncodeError
+
+    2. Set encoding on open()
+
+    3. Re-run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

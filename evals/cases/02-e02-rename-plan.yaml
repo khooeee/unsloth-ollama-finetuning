@@ -1,0 +1,16 @@
+id: e02-rename-plan
+prompt: Plan how you would rename function `load_cfg` to `load_config` across a Python package and keep
+  tests green. Number your steps.
+requires_tool: false
+rubric:
+  min_steps_or_commands: 3
+  must_mention_any:
+  - rg
+  - pytest
+  - rename
+  - load_cfg
+  - load_config
+  require_run_command: false
+  expect_ordered_hints:
+  - rg
+  - pytest

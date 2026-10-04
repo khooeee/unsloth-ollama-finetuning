@@ -1,0 +1,10 @@
+id: e05-import-fix
+prompt: python app.py raises NameError for json. Give an inspect → edit → verify command plan.
+requires_tool: false
+rubric:
+  min_steps_or_commands: 3
+  must_mention_any:
+  - import json
+  - app.py
+  - python
+  require_run_command: false

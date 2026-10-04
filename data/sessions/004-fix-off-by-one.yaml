@@ -1,0 +1,18 @@
+id: 004-fix-off-by-one
+messages:
+- role: user
+  content: slice_window(xs, n) drops the last element. Fix the off-by-one and verify with tests.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run the failing test to see expected vs actual
+
+    2. Inspect slice_window in utils.py
+
+    3. Fix the end index
+
+    4. Re-run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

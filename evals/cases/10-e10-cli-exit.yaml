@@ -1,0 +1,10 @@
+id: e10-cli-exit
+prompt: CLI returns 0 when args are invalid. Outline inspect → edit → pytest steps.
+requires_tool: false
+rubric:
+  min_steps_or_commands: 3
+  must_mention_any:
+  - exit
+  - '1'
+  - pytest
+  require_run_command: false

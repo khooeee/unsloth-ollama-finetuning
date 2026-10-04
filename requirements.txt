@@ -1,0 +1,16 @@
+# Unsloth MLX fine-tune → GGUF → Ollama sandbox chat
+#
+# Use Python 3.11–3.13 (Unsloth does not support 3.14 yet).
+
+unsloth
+unsloth_zoo
+mlx
+mlx-lm
+transformers
+datasets
+pyyaml
+requests
+tqdm
+protobuf
+sentencepiece
+gguf

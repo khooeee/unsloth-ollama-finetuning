@@ -1,0 +1,16 @@
+id: 010-mutable-default
+messages:
+- role: user
+  content: append_item uses a mutable default list. Fix the classic bug without breaking callers.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Locate append_item
+
+    2. Replace mutable default with None + create list inside
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

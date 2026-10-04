@@ -1,0 +1,16 @@
+id: 007-json-key-typo
+messages:
+- role: user
+  content: load_settings reads 'timout' instead of 'timeout' from settings.json. Fix and verify.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Inspect load_settings and settings.json
+
+    2. Fix the key name
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

@@ -1,0 +1,16 @@
+id: 008-regex-escape
+messages:
+- role: user
+  content: match_version fails on strings with dots because the regex isn't escaped. Fix it.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run the failing version tests
+
+    2. Use re.escape on the literal parts
+
+    3. Re-run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

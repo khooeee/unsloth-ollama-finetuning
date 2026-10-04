@@ -1,0 +1,16 @@
+id: 018-dedupe-stable
+messages:
+- role: user
+  content: unique_keep_order drops the first occurrence instead of later dupes. Fix it.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run the unique() tests
+
+    2. Track seen values correctly
+
+    3. Re-run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

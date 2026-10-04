@@ -1,0 +1,12 @@
+id: e11-http-2xx
+prompt: fetch_ok treats 404 as success. How do you change the status check and verify?
+requires_tool: false
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - '200'
+  - '300'
+  - 2xx
+  - pytest
+  - status
+  require_run_command: false

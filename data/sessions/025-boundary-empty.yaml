@@ -1,0 +1,16 @@
+id: 025-boundary-empty
+messages:
+- role: user
+  content: median([]) should raise ValueError, but returns 0. Fix empty-list handling.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run test_stats.py
+
+    2. Raise on empty input
+
+    3. Re-run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

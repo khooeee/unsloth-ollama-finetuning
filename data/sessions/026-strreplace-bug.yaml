@@ -1,0 +1,16 @@
+id: 026-strreplace-bug
+messages:
+- role: user
+  content: rewrite_url replaces only the first 'http' occurrence and breaks 'https'. Fix replacement logic.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Inspect rewrite_url
+
+    2. Replace the scheme safely
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

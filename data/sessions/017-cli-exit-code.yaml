@@ -1,0 +1,16 @@
+id: 017-cli-exit-code
+messages:
+- role: user
+  content: CLI returns 0 even when validation fails. Exit non-zero on errors.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Find main() exit paths
+
+    2. sys.exit(1) on validation failure
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

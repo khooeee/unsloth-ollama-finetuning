@@ -1,0 +1,10 @@
+id: e08-utf8
+prompt: write_report hits UnicodeEncodeError. What commands would you run to fix encoding and verify?
+requires_tool: false
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - utf-8
+  - encoding
+  - pytest
+  require_run_command: false

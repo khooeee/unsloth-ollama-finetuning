@@ -1,0 +1,50 @@
+id: 040-tool-csv-header
+messages:
+- role: user
+  content: export_csv omits headers. Patch and verify.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_export.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_export.py::test_header - AssertionError: first row was data, not header'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: sed -n '1,50p' export_csv.py
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: "import csv\n\ndef export_csv(path, rows, headers):\n    with open(path, 'w', newline='') as\
+    \ f:\n        w = csv.writer(f)\n        w.writerows(rows)\n"
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: "python - <<'PY'\nfrom pathlib import Path\nPath('export_csv.py').write_text('''import\
+        \ csv\n\ndef export_csv(path, rows, headers):\n    with open(path, \"w\", newline=\"\") as f:\n\
+        \        w = csv.writer(f)\n        w.writerow(headers)\n        w.writerows(rows)\n''')\nprint('added\
+        \ header write')\nPY"
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: added header write
+- role: assistant
+  tool_calls:
+  - id: c4
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_export.py
+- role: tool
+  tool_call_id: c4
+  name: run_command
+  content: 1 passed
+- role: assistant
+  content: CSV exporter now writes headers before rows; test passed.

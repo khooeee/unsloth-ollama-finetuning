@@ -1,0 +1,16 @@
+id: 031-param-order
+messages:
+- role: user
+  content: connect(host, port) callers pass port, host. Fix signature or call sites consistently.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. rg connect(
+
+    2. Align parameters
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

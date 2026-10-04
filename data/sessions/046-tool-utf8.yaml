@@ -1,0 +1,48 @@
+id: 046-tool-utf8
+messages:
+- role: user
+  content: write_report fails on non-ASCII. Force utf-8.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_report.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: FAILED tests/test_report.py::test_unicode - UnicodeEncodeError
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: 'python - <<''PY''
+
+        from pathlib import Path
+
+        p=Path(''report.py'')
+
+        t=p.read_text().replace("open(path, ''w'')","open(path, ''w'', encoding=''utf-8'')")
+
+        p.write_text(t)
+
+        print(''encoding set'')
+
+        PY'
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: encoding set
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_report.py
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: 1 passed
+- role: assistant
+  content: Opened the report file with encoding='utf-8'; unicode test passed.

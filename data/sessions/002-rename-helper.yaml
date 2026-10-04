@@ -1,0 +1,18 @@
+id: 002-rename-helper
+messages:
+- role: user
+  content: Rename helper `parse_line` to `parse_record` across the package and keep tests green.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. rg -n ''parse_line'' to list call sites
+
+    2. Rename the function definition
+
+    3. Update imports and call sites
+
+    4. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

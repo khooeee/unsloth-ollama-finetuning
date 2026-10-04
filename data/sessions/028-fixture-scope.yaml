@@ -1,0 +1,16 @@
+id: 028-fixture-scope
+messages:
+- role: user
+  content: A module-scoped fixture leaks DB rows between tests. Isolate state.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Read conftest.py fixtures
+
+    2. Reset DB per test or narrow fixture scope
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

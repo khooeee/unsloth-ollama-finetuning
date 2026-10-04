@@ -1,0 +1,10 @@
+id: e07-csv-header-tool
+prompt: CSV export skips the header row. Use run_command style steps to fix export_csv and run tests.
+requires_tool: true
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - header
+  - writerow
+  - pytest
+  require_run_command: true

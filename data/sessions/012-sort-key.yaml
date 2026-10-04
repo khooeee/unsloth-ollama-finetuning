@@ -1,0 +1,16 @@
+id: 012-sort-key
+messages:
+- role: user
+  content: sort_people should sort by age ascending then name. Fix the sort key.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Read the failing test expectations
+
+    2. Update sorted(..., key=...)
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

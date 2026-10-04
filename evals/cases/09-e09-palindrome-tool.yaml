@@ -1,0 +1,10 @@
+id: e09-palindrome-tool
+prompt: is_palindrome('aba') returns None because a recursive call forgets return. Fix it with run_command.
+requires_tool: true
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - return
+  - palindrome
+  - pytest
+  require_run_command: true

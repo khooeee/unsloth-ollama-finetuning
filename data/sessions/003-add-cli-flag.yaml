@@ -1,0 +1,21 @@
+id: 003-add-cli-flag
+messages:
+- role: user
+  content: Add a --verbose flag to cli.py that prints each processed path. Keep existing tests passing
+    and add one new test.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Read cli.py and its tests
+
+    2. Add argparse --verbose
+
+    3. Print paths when the flag is set
+
+    4. Add a test for --verbose
+
+    5. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

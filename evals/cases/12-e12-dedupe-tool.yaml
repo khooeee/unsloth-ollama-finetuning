@@ -1,0 +1,10 @@
+id: e12-dedupe-tool
+prompt: unique_keep_order keeps the last duplicate instead of the first. Use run_command to fix and test.
+requires_tool: true
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - seen
+  - pytest
+  - unique
+  require_run_command: true

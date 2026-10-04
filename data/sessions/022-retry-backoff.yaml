@@ -1,0 +1,16 @@
+id: 022-retry-backoff
+messages:
+- role: user
+  content: retry_call sleeps 0 between attempts. Use exponential backoff.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Open retry_call
+
+    2. Sleep 2**attempt (or similar) between tries
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

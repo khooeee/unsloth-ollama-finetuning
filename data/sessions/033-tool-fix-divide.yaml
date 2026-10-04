@@ -1,0 +1,58 @@
+id: 033-tool-fix-divide
+messages:
+- role: user
+  content: 'calc/ops.py divide is wrong: divide(5,2) should be 2.5. Use the shell to fix and verify.'
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_ops.py::test_divide - AssertionError: assert 2 == 2.5
+
+    1 failed, 1 passed'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: sed -n '1,40p' calc/ops.py
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: "def add(a, b):\n    return a + b\n\ndef divide(a, b):\n    return a // b\n"
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: 'python - <<''PY''
+
+        from pathlib import Path
+
+        p=Path(''calc/ops.py'')
+
+        p.write_text(p.read_text().replace(''return a // b'',''return a / b''))
+
+        print(''patched'')
+
+        PY'
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: patched
+- role: assistant
+  tool_calls:
+  - id: c4
+    name: run_command
+    arguments:
+      command: pytest -q
+- role: tool
+  tool_call_id: c4
+  name: run_command
+  content: 2 passed
+- role: assistant
+  content: Fixed `divide` to use true division (`a / b`). pytest is green (2 passed).

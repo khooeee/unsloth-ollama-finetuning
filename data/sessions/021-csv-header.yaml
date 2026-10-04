@@ -1,0 +1,16 @@
+id: 021-csv-header
+messages:
+- role: user
+  content: export_csv forgets the header row. Write headers then rows.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Read export_csv and its test
+
+    2. Write header first
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

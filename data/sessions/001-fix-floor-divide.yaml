@@ -1,0 +1,18 @@
+id: 001-fix-floor-divide
+messages:
+- role: user
+  content: tests/test_ops.py fails because divide(5, 2) returns 2 instead of 2.5. Fix it.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run pytest -q to reproduce the failure
+
+    2. Open calc/ops.py and find divide
+
+    3. Change a // b to a / b
+
+    4. Re-run pytest -q and confirm green
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

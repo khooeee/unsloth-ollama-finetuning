@@ -1,0 +1,60 @@
+id: 043-tool-cli-exit
+messages:
+- role: user
+  content: CLI exits 0 on validation failure. Make it exit 1.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_cli.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_cli.py::test_bad_args_exit_code - AssertionError: assert 0 == 1'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: rg -n 'sys.exit|return' cli.py
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: 'cli.py:20:    return 0
+
+    cli.py:24:    return 0'
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: 'python - <<''PY''
+
+        from pathlib import Path
+
+        p=Path(''cli.py'')
+
+        t=p.read_text().replace(''if not args.path:\n    return 0'',''if not args.path:\n    return 1'')
+
+        p.write_text(t)
+
+        print(''exit code fixed'')
+
+        PY'
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: exit code fixed
+- role: assistant
+  tool_calls:
+  - id: c4
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_cli.py
+- role: tool
+  tool_call_id: c4
+  name: run_command
+  content: 2 passed
+- role: assistant
+  content: Validation failure now returns exit code 1; CLI tests passed.

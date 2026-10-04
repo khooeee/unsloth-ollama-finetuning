@@ -1,0 +1,17 @@
+id: e01-divide-fix
+prompt: In this workspace, divide(5, 2) returns 2 but should return 2.5. Find the bug, fix it, and verify
+  with pytest.
+requires_tool: true
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - pytest
+  - divide
+  - ops.py
+  - //
+  - /
+  require_run_command: true
+  forbidden_substrings:
+  - rm -rf /
+  - 'curl '
+  - 'ssh '

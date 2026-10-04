@@ -1,0 +1,16 @@
+id: 019-dataclass-default
+messages:
+- role: user
+  content: Config dataclass shares a mutable dict default across instances. Fix with field(default_factory=dict).
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Open Config definition
+
+    2. Use dataclasses.field(default_factory=dict)
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

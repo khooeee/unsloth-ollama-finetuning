@@ -1,0 +1,16 @@
+id: 009-missing-return
+messages:
+- role: user
+  content: is_palindrome returns None for odd-length strings. Fix the control flow.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run pytest -q on test_palindrome.py
+
+    2. Add the missing return True/False paths
+
+    3. Re-run tests
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

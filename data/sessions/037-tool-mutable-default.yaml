@@ -1,0 +1,48 @@
+id: 037-tool-mutable-default
+messages:
+- role: user
+  content: bag.add uses a mutable default. Fix the classic Python bug.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_bag.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_bag.py::test_isolation - AssertionError: lists leaked across calls'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: sed -n '1,40p' bag.py
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: "def add(item, items=[]):\n    items.append(item)\n    return items\n"
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: "python - <<'PY'\nfrom pathlib import Path\np=Path('bag.py')\np.write_text('''def add(item,\
+        \ items=None):\n    if items is None:\n        items = []\n    items.append(item)\n    return\
+        \ items\n''')\nprint('rewrote bag.add')\nPY"
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: rewrote bag.add
+- role: assistant
+  tool_calls:
+  - id: c4
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_bag.py
+- role: tool
+  tool_call_id: c4
+  name: run_command
+  content: 1 passed
+- role: assistant
+  content: Replaced the mutable default with `items=None` and local list creation; tests pass.

@@ -1,0 +1,42 @@
+id: 034-tool-rename-function
+messages:
+- role: user
+  content: Rename `add_numbers` to `add` in mathutil.py and update tests.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: rg -n 'add_numbers' -g '*.py'
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'mathutil.py:3:def add_numbers(a, b):
+
+    tests/test_mathutil.py:4:assert add_numbers(1, 2) == 3'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: "python - <<'PY'\nfrom pathlib import Path\nfor rel in ['mathutil.py','tests/test_mathutil.py']:\n\
+        \ p=Path(rel)\n p.write_text(p.read_text().replace('add_numbers','add'))\n print('updated', rel)\n\
+        PY"
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: 'updated mathutil.py
+
+    updated tests/test_mathutil.py'
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_mathutil.py
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: 1 passed
+- role: assistant
+  content: Renamed `add_numbers` → `add` in code and tests; tests passed.

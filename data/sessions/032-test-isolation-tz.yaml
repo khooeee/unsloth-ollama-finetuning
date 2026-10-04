@@ -1,0 +1,16 @@
+id: 032-test-isolation-tz
+messages:
+- role: user
+  content: Time-based tests fail outside UTC. Freeze time or set TZ in the test.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Identify flaky time test
+
+    2. Pin timezone or mock datetime
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

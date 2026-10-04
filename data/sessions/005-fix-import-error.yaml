@@ -1,0 +1,18 @@
+id: 005-fix-import-error
+messages:
+- role: user
+  content: 'python -m app crashes with ModuleNotFoundError: config_loader. Fix the import.'
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run python -m app to reproduce
+
+    2. Find the bad import with rg
+
+    3. Correct the module path
+
+    4. Re-run python -m app and pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

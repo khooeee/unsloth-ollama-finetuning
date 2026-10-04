@@ -1,0 +1,16 @@
+id: 030-close-file
+messages:
+- role: user
+  content: read_blob leaves files open. Use a context manager.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Open read_blob
+
+    2. Wrap open() in with
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

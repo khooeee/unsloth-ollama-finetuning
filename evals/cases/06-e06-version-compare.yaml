@@ -1,0 +1,11 @@
+id: e06-version-compare
+prompt: version_gte('1.10','1.2') is False due to string compare. Fix approach and how you'd verify.
+requires_tool: false
+rubric:
+  min_steps_or_commands: 3
+  must_mention_any:
+  - split
+  - int
+  - pytest
+  - tuple
+  require_run_command: false

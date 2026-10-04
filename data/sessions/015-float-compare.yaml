@@ -1,0 +1,16 @@
+id: 015-float-compare
+messages:
+- role: user
+  content: assert nearly_equal(0.1+0.2, 0.3) fails due to float compare. Use a tolerance.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Inspect nearly_equal
+
+    2. Compare with abs(a-b) < eps
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

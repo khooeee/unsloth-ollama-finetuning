@@ -1,0 +1,16 @@
+id: 014-cache-invalidate
+messages:
+- role: user
+  content: get_user caches forever after updates. Invalidate or key the cache correctly.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Read get_user and update_user
+
+    2. Clear or version the cache on update
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

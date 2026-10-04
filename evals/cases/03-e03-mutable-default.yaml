@@ -1,0 +1,12 @@
+id: e03-mutable-default
+prompt: A function uses `def add(item, items=[]):`. Explain the bug and the shell commands you'd run to
+  fix and test it.
+requires_tool: false
+rubric:
+  min_steps_or_commands: 3
+  must_mention_any:
+  - None
+  - mutable
+  - pytest
+  - default
+  require_run_command: false

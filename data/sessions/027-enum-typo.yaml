@@ -1,0 +1,16 @@
+id: 027-enum-typo
+messages:
+- role: user
+  content: Status.CANCELLED is misspelled CANCELLED as CANCELED inconsistently. Unify and fix tests.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. rg CANCEL
+
+    2. Pick one spelling and update code+tests
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

@@ -1,0 +1,16 @@
+id: 024-async-await
+messages:
+- role: user
+  content: get_json is async but callers forget await, so tests get coroutines. Fix call sites.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Reproduce in pytest
+
+    2. Add await at call sites / mark tests async
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

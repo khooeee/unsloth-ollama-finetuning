@@ -1,0 +1,16 @@
+id: 011-path-join
+messages:
+- role: user
+  content: open_data uses string concat for paths and breaks on Windows-style joins in tests. Use pathlib.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Find open_data
+
+    2. Switch to pathlib.Path
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

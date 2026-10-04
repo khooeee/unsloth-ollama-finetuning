@@ -1,0 +1,16 @@
+id: 029-version-compare
+messages:
+- role: user
+  content: version_gte('1.10', '1.2') is False because of string compare. Parse properly.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Run version tests
+
+    2. Compare as tuples of ints
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

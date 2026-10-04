@@ -1,0 +1,16 @@
+id: 020-logging-level
+messages:
+- role: user
+  content: debug logs always print. Honor LOG_LEVEL from the environment.
+- role: assistant
+  content: 'Here is a tight inspect → edit → verify plan:
+
+
+    1. Inspect logging setup
+
+    2. Read LOG_LEVEL and setLevel
+
+    3. Run pytest -q
+
+
+    Use run_command for each shell step; re-run tests before declaring done.'

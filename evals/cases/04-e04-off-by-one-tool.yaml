@@ -1,0 +1,11 @@
+id: e04-off-by-one-tool
+prompt: first_n(xs, n) returns one too few items. Use run_command to inspect, patch, and re-test.
+requires_tool: true
+rubric:
+  min_steps_or_commands: 2
+  must_mention_any:
+  - pytest
+  - first_n
+  - slice
+  - '[:'
+  require_run_command: true

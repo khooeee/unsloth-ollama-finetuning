@@ -1,0 +1,39 @@
+id: 045-tool-empty-median
+messages:
+- role: user
+  content: median([]) should raise ValueError.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_stats.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_stats.py::test_empty - AssertionError: did not raise'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: "python - <<'PY'\nfrom pathlib import Path\nPath('stats.py').write_text('''def median(xs):\n\
+        \    if not xs:\n        raise ValueError(\"empty\")\n    ys = sorted(xs)\n    mid = len(ys) //\
+        \ 2\n    if len(ys) % 2:\n        return ys[mid]\n    return (ys[mid - 1] + ys[mid]) / 2\n''')\n\
+        print('median fixed')\nPY"
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: median fixed
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_stats.py
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: 3 passed
+- role: assistant
+  content: Empty input now raises ValueError; stats tests are green.

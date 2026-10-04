@@ -1,0 +1,38 @@
+id: 047-tool-dedupe
+messages:
+- role: user
+  content: unique_keep_order keeps the last duplicate. Keep the first instead.
+- role: assistant
+  tool_calls:
+  - id: c1
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_unique.py
+- role: tool
+  tool_call_id: c1
+  name: run_command
+  content: 'FAILED tests/test_unique.py::test_order - AssertionError: assert [2,1] == [1,2]'
+- role: assistant
+  tool_calls:
+  - id: c2
+    name: run_command
+    arguments:
+      command: "python - <<'PY'\nfrom pathlib import Path\nPath('unique.py').write_text('''def unique_keep_order(xs):\n\
+        \    seen = set()\n    out = []\n    for x in xs:\n        if x in seen:\n            continue\n\
+        \        seen.add(x)\n        out.append(x)\n    return out\n''')\nprint('dedupe fixed')\nPY"
+- role: tool
+  tool_call_id: c2
+  name: run_command
+  content: dedupe fixed
+- role: assistant
+  tool_calls:
+  - id: c3
+    name: run_command
+    arguments:
+      command: pytest -q tests/test_unique.py
+- role: tool
+  tool_call_id: c3
+  name: run_command
+  content: 1 passed
+- role: assistant
+  content: Deduper now keeps first occurrences in order; test passed.
